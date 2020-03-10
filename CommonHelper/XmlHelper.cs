@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="your company" file="FrmSel_OrdersList.cs">
+// <copyright company="your company" file="XmlHelper.cs">
 //  Copyright (c)  V1.0.0.0  
 //  builder  name: arson
 //  build    time: 2020-03-10
