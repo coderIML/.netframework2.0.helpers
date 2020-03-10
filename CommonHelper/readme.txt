@@ -1,0 +1,1 @@
+﻿the library can be used by win program and web program!
