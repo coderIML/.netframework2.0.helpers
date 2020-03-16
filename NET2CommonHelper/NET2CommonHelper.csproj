@@ -7,8 +7,8 @@
     <ProjectGuid>{084F768B-F506-4EB4-AA89-AC1BD102170A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonHelper</RootNamespace>
-    <AssemblyName>CommonHelper</AssemblyName>
+    <RootNamespace>NET2CommonHelper</RootNamespace>
+    <AssemblyName>NET2CommonHelper</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

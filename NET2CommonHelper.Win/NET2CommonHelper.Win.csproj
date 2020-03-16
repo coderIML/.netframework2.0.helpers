@@ -7,8 +7,8 @@
     <ProjectGuid>{BF9588AD-21E5-42E1-B416-9F6A4B91DE08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonHelper.Win</RootNamespace>
-    <AssemblyName>CommonHelper.Win</AssemblyName>
+    <RootNamespace>NET2CommonHelper.Win</RootNamespace>
+    <AssemblyName>NET2CommonHelper.Win</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,9 +43,9 @@
     <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NET2.CommonHelper\NET2.CommonHelper.csproj">
+    <ProjectReference Include="..\NET2CommonHelper\NET2CommonHelper.csproj">
       <Project>{084f768b-f506-4eb4-aa89-ac1bd102170a}</Project>
-      <Name>NET2.CommonHelper</Name>
+      <Name>NET2CommonHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
