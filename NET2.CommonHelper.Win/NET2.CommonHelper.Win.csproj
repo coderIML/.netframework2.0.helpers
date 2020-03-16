@@ -43,9 +43,9 @@
     <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonHelper\CommonHelper.csproj">
+    <ProjectReference Include="..\NET2.CommonHelper\NET2.CommonHelper.csproj">
       <Project>{084f768b-f506-4eb4-aa89-ac1bd102170a}</Project>
-      <Name>CommonHelper</Name>
+      <Name>NET2.CommonHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
