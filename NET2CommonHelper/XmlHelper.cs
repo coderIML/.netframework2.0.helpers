@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace CommonHelper
+namespace NET2CommonHelper
 {
     /// <summary>
     /// xml helper class
