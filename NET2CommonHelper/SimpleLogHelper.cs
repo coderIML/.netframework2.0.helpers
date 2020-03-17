@@ -20,48 +20,47 @@ using System.Xml.Serialization;
 namespace NET2CommonHelper
 {
     /// <summary>
-    /// 日志帮助类
+    /// simle log helper
     /// </summary>
-    /// <remarks>自定义的日志操作类</remarks>
-    public class SimpleLogHelper
+    public abstract class SimpleLogHelper
     {
-        private SimpleLogHelper() { }
+
 
         /// <summary>
-        /// 获取调用方法信息
+        /// get invoke method info
         /// </summary>
-        /// <returns>方法信息</returns>
-        private static string GetMethodInfo()
+        /// <returns>method info</returns>
+        private string GetMethodInfo()
         {
             System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace();
-            //获取调用此日志的方法信息(日志内部调用此方法，所以Frame基数为2开始)
+            //get the method that invoke the log method
             MethodBase method = st.GetFrame(2).GetMethod();
             StringBuilder builder = new StringBuilder(256);
-            //方法名所在命名空间和类
-            builder.AppendFormat("\r\n方法所在命名空间和类:{0}\r\n", method.ReflectedType.FullName);
-            //调用此日志方法的方法名称
-            builder.AppendFormat("方法名称:{0}\r\n", method.Name);
-            //获取方法参数签名
+            //namespace and base class of the method
+            builder.AppendFormat("\r\nnamespace and base class of the invoker's method:{0}\r\n", method.ReflectedType.FullName);
+            //invoke the log method of invoker's method
+            builder.AppendFormat("invoker's method name:{0}\r\n", method.Name);
+            //get invoker's method parameters
             ParameterInfo[] parameters = method.GetParameters();
             foreach (ParameterInfo info in parameters)
             {
-                builder.AppendFormat("参数类型:{0},参数名称:{1}\r\n", info.ParameterType.FullName, info.Name);
+                builder.AppendFormat("parameter type:{0},parameter name:{1}\r\n", info.ParameterType.FullName, info.Name);
             }
             return builder.ToString();
         }
 
         /// <summary>
-        /// 获取实体信息
+        /// get entity info
         /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        /// <returns>实体信息</returns>
-        private static string GetEntityInfo<T>(T entity) where T : class, new()
+        /// <typeparam name="T">entity type</typeparam>
+        /// <param name="entity">entity object</param>
+        /// <returns>entity info</returns>
+        private string GetEntityInfo<T>(T entity) where T : class, new()
         {
             string entityInfo = string.Empty;
             using (StringWriter sw = new StringWriter())
             {
-                //创建XML命名空间
+                //create xml namespace
                 XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
@@ -72,101 +71,101 @@ namespace NET2CommonHelper
         }
 
         /// <summary>
-        /// 记录实体日志
+        /// record entity log
         /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        /// <param name="content">备注</param>
-        /// <param name="type">日志类型</param>
-        /// <remarks>将对象序列化记录到文本日志中去,方便后期查询日志</remarks>
-        public static void Write<T>(T entity, string content, LogTypes type = LogTypes.Other) where T : class, new()
+        /// <typeparam name="T">entity type</typeparam>
+        /// <param name="entity">entity object</param>
+        /// <param name="content">remark</param>
+        /// <param name="type">log type</param>
+        /// <remarks>shall convert the entity object to serial log,maybe query it in the future!</remarks>
+        public void Write<T>(T entity, string content, LogTypes type = LogTypes.Other) where T : class, new()
         {
 
             Write(GetEntityInfo(entity) + "\r\n" + content, GetMethodInfo(), null, type, "");
         }
 
         /// <summary>
-        /// 记录实体日志
+        /// record entity log
         /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        /// <param name="type">日志类型</param>
-        public static void Write<T>(T entity, LogTypes type = LogTypes.Other) where T : class, new()
+        /// <typeparam name="T">entity type</typeparam>
+        /// <param name="entity">entity object</param>
+        /// <param name="type">log type</param>
+        public void Write<T>(T entity, LogTypes type = LogTypes.Other) where T : class, new()
         {
             Write(GetEntityInfo(entity), GetMethodInfo(), null, type, "");
         }
 
         /// <summary>
-        /// 记录实体日志
+        /// record entity log
         /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        /// <param name="exception">异常对象</param>
-        /// <param name="type">日志类型</param>
-        public static void Write<T>(T entity, Exception exception, LogTypes type = LogTypes.Exception) where T : class, new()
+        /// <typeparam name="T">entity type</typeparam>
+        /// <param name="entity">entity object</param>
+        /// <param name="exception">exception object</param>
+        /// <param name="type">log type</param>
+        public void Write<T>(T entity, Exception exception, LogTypes type = LogTypes.Exception) where T : class, new()
         {
             Write(GetEntityInfo(entity), GetMethodInfo(), exception, type, "");
         }
 
         /// <summary>
-        /// 日志记录
+        /// record text log
         /// </summary>
-        /// <param name="content">日志内容</param>
-        /// <param name="type">日志类型</param>
-        public static void Write(string content, LogTypes type = LogTypes.Other)
+        /// <param name="content">log content</param>
+        /// <param name="type">log type</param>
+        public void Write(string content, LogTypes type = LogTypes.Other)
         {
             Write(content, GetMethodInfo(), null, type, "");
         }
 
         /// <summary>
-        /// 日志记录
+        /// record exception log
         /// </summary>
-        /// <param name="exception">异常对象</param>
-        /// <param name="content">备注内容</param>
-        /// <param name="type">日志类型</param>
-        public static void Write(Exception exception, string content, LogTypes type = LogTypes.Exception)
+        /// <param name="exception">exception object</param>
+        /// <param name="content">remark</param>
+        /// <param name="type">log type</param>
+        public void Write(Exception exception, string content, LogTypes type = LogTypes.Exception)
         {
             Write(content, GetMethodInfo(), exception, type, "");
         }
 
         /// <summary>
-        /// 日志记录
+        /// record exception log
         /// </summary>
-        /// <param name="exception">异常对象</param>
-        /// <param name="type">日志类型</param>
-        public static void Write(Exception exception, LogTypes type = LogTypes.Exception)
+        /// <param name="exception">exception object</param>
+        /// <param name="type">log type</param>
+        public void Write(Exception exception, LogTypes type = LogTypes.Exception)
         {
             Write(string.Empty, GetMethodInfo(), exception, type, "");
         }
 
         /// <summary>
-        /// 系统日志写入
+        /// record log
         /// </summary>
-        /// <param name="content">自定义日志内容</param>
-        /// <param name="methodInfo">日志发生所在方法信息</param>
-        /// <param name="exception">异常日志</param>
-        /// <param name="type">日志类型</param>
-        /// <param name="savePath">日志保存路径(默认存在应用程序所在文件夹下),后期扩展可用于网络传输日志操作</param>
-        public static void Write(string content, string methodInfo, Exception exception, LogTypes type, string savePath)
+        /// <param name="content">custom log content</param>
+        /// <param name="methodInfo">log info from invoker's method info</param>
+        /// <param name="exception">exception object</param>
+        /// <param name="type">log type</param>
+        /// <param name="savePath">log saved path(default:the log files are saved into current application executable's path</param>
+        public void Write(string content, string methodInfo, Exception exception, LogTypes type, string savePath)
         {
             if (!string.IsNullOrEmpty(content) || exception != null)
             {
-                //不存在自定义日志内容和异常对象时候无需写入日志文件
+                //if there are no custom log content or exception object,the log will be not record!
                 string timeString = DateTime.Now.ToString();
                 StringBuilder append = new StringBuilder();
-                append.AppendFormat("时间:{0}\r\n", timeString);
+                append.AppendFormat("time:{0}\r\n", timeString);
                 if (!string.IsNullOrEmpty(content))
                 {
-                    append.AppendFormat("内容:{0}\r\n", content);
+                    append.AppendFormat("content:{0}\r\n", content);
                 }
                 if (!string.IsNullOrEmpty(methodInfo))
                 {
-                    append.AppendFormat("方法信息:{0}\r\n", methodInfo);
+                    append.AppendFormat("method info:{0}\r\n", methodInfo);
                 }
                 if (exception != null)
                 {
-                    append.AppendFormat("异常:{0}\r\n", exception.Message);
-                    append.AppendFormat("堆栈:{0}\r\n", exception.StackTrace);
+                    append.AppendFormat("exception:{0}\r\n", exception.Message);
+                    append.AppendFormat("heap:{0}\r\n", exception.StackTrace);
                 }
                 append.Append("****************************");
                 WriteLog(append.ToString(), type, savePath);
@@ -174,12 +173,21 @@ namespace NET2CommonHelper
         }
 
         /// <summary>
-        /// 写入日志
+        /// 获取日志保存默认路径
         /// </summary>
-        /// <param name="info">日志内容</param>
-        /// <param name="type">日志类型</param>
-        /// <param name="savePath">日志保存路径(默认存在应用程序所在文件夹下),后期扩展可用于网络传输日志操作</param>
-        private static void WriteLog(string info, LogTypes type, string savePath = "")
+        /// <returns></returns>
+        protected virtual string GetLogSaveDefaultPath()
+        {
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// record log
+        /// </summary>
+        /// <param name="info">log content</param>
+        /// <param name="type">log type</param>
+        /// <param name="savePath">log saved path(default:the log files are saved into current application executable's path</param>
+        private void WriteLog(string info, LogTypes type, string savePath = "")
         {
             string directory = string.Empty;
             try

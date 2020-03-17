@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{084F768B-F506-4EB4-AA89-AC1BD102170A}</ProjectGuid>
+    <ProjectGuid>{A0140F2A-DE35-4D29-A7F4-482317C7B096}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NET2CommonHelper</RootNamespace>
-    <AssemblyName>NET2CommonHelper</AssemblyName>
+    <RootNamespace>NET2CommonHelper.Web</RootNamespace>
+    <AssemblyName>NET2CommonHelper.Web</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,16 +33,21 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SecurityHelper.cs" />
     <Compile Include="SimpleLogHelper.cs" />
-    <Compile Include="XmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NET2CommonHelper\NET2CommonHelper.csproj">
+      <Project>{084f768b-f506-4eb4-aa89-ac1bd102170a}</Project>
+      <Name>NET2CommonHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
