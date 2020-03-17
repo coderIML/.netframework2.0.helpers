@@ -353,3 +353,4 @@ MigrationBackup/
 *.nuspec
 *.nupkg
 *nuget.exe
+*.bat
