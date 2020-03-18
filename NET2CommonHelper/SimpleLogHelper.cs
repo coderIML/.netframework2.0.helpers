@@ -24,8 +24,6 @@ namespace NET2CommonHelper
     /// </summary>
     public abstract class SimpleLogHelper
     {
-
-
         /// <summary>
         /// get invoke method info
         /// </summary>
@@ -305,7 +303,7 @@ namespace NET2CommonHelper
                     }
                 }
             }
-            catch (System.Exception ex)
+            catch 
             {
             }
         }
@@ -326,50 +324,50 @@ namespace NET2CommonHelper
     }
 
     /// <summary>
-    /// 记录日志类型
+    /// log type enum 
     /// </summary>
     public enum LogTypes
     {
         /// <summary>
-        /// 异常日志
+        /// Exception
         /// </summary>
-        [Description("异常日志")]
+        [Description("Exception")]
         Exception = 0x0,
 
         /// <summary>
-        /// 特殊日志
+        /// Special
         /// </summary>
-        [Description("特殊日志")]
+        [Description("Special")]
         Special = 0x02,
 
         /// <summary>
-        /// 操作日志
+        /// Operate
         /// </summary>
-        [Description("操作日志")]
+        [Description("Operate")]
         Operate = 0x04,
 
         /// <summary>
-        /// 登陆注销
+        /// Login
         /// </summary>
-        [Description("登陆注销")]
+        [Description("Login")]
         Login = 0x08,
 
         /// <summary>
-        /// 数据变更
+        /// DataChange
         /// </summary>
-        [Description("数据变更")]
+        [Description("DataChange")]
         DataChange = 0x16,
 
         /// <summary>
-        /// 其他日志
+        /// Other
         /// </summary>
-        [Description("其他日志")]
+        [Description("Other")]
         Other = 0x32,
 
         /// <summary>
-        /// 普通错误
+        /// Fault
         /// </summary>
-        [Description("普通错误")]
+        [Description("Fault")]
         Fault = 0x64,
     }
 }

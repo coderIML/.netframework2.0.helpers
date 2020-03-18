@@ -7,28 +7,6 @@ namespace NET2CommonHelper.Win
 {
     public sealed class SimpleLogHelper : NET2CommonHelper.SimpleLogHelper
     {
-        private SimpleLogHelper instance = null;
-        private static readonly object padlock = new object();
-
-        public SimpleLogHelper Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new SimpleLogHelper();
-                    }
-                    return instance;
-                }
-            }
-        }
-
-        private SimpleLogHelper()
-        {
-
-        }
 
         protected override string GetLogSaveDefaultPath()
         {
